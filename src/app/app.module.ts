@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { HttpService } from './http.service';
-
+import { JsonApiModule } from 'angular2-jsonapi';
+import { Datastore } from './http.service';
 
 @NgModule({
   declarations: [
@@ -12,9 +12,10 @@ import { HttpService } from './http.service';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    JsonApiModule
   ],
-  providers: [HttpService],
+  providers: [Datastore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

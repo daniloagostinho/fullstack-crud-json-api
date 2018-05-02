@@ -1,5 +1,6 @@
-import { HttpService } from './http.service';
 import { Component } from '@angular/core';
+import { Datastore } from './http.service';
+import { Alunoes } from './datastore/models/alunoes.model';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,18 @@ export class AppComponent {
   title = 'app';
   alunos;
 
-  constructor(private httpService: HttpService) {
+  constructor(private datastore: Datastore) {
 
   }
 
   ngOnInit() {
-    this.httpService.getAlunos()
-    .subscribe(alunos => this.alunos = alunos);
-
-    console.log(this.alunos);
+    this.datastore.findAll(Alunoes).subscribe(resultado => {
+      this.alunos = resultado;
+      // this.responsibleList = [{
+      //   'responsible_name': unitSelected.responsible_name,
+      //   'responsible_email': unitSelected.responsible_email
+      // }];
+    });
   }
+
 }

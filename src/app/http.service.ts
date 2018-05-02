@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
+import { JsonApiDatastoreConfig, JsonApiDatastore, DatastoreConfig } from 'angular2-jsonapi';
 import { HttpClient } from '@angular/common/http';
+import { Alunoes } from './datastore/models/alunoes.model';
+
+const config: DatastoreConfig = {
+  models: {
+    Alunoes: Alunoes
+  }
+}
 
 @Injectable()
-export class HttpService {
+@JsonApiDatastoreConfig(config)
+export class Datastore extends JsonApiDatastore {
 
-  configUrl = 'http://localhost:50568/api/Alunoes';
-
-  getAlunos() {
-    return this.http.get(this.configUrl);
-  }
-
-  constructor(private http: HttpClient) { }
+    constructor(http: HttpClient) {
+        super(http);
+    }
 
 }
